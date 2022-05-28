@@ -1,3 +1,8 @@
+# Nama   : Ahmad Sutisna
+# NIM    : 191011401866
+
+# UAS Rekayasa Perangkat Lunak
+# Metode Fuzzy Sugeno
 def down(x, xmin, xmax):
     return (xmax- x) / (xmax - xmin)
 
@@ -76,17 +81,19 @@ class Produksi():
         z1 = self.kurang(α1)
         result.append((α1, z1))
         # [R2] JIKA Permintaan TURUN, dan Persediaan SEDIKIT, 
-        #     MAKA Produksi Barang BERKURANG.
+        #     MAKA Produksi = 10* kurang + 100.
         α2 = min(pmt.turun(jumlah_permintaan), psd.sedikit(jumlah_persediaan))
-        z2 = self.kurang(α2)
+        z2 = 10 * kurang + 100
         result.append((α2, z2))
+
         # [R3] JIKA Permintaan NAIK, dan Persediaan BANYAK, 
-        #     MAKA Produksi Barang BERTAMBAH.
+        #     MAKA Produksi = 10 * kurang + 200.
         α3 = min(pmt.naik(jumlah_permintaan), psd.banyak(jumlah_persediaan))
-        z3 = self.tambah(α3)
+        z3 = 10 * tambah + 200
         result.append((α3, z3))
+
         # [R4] JIKA Permintaan NAIK, dan Persediaan SEDIKIT,
-        #     MAKA Produksi Barang BERTAMBAH.
+        #     MAKA Produksi =5 * Barang BERTAMBAH.
         α4 = min(pmt.naik(jumlah_permintaan), psd.sedikit(jumlah_persediaan))
         z4 = self.tambah(α4)
         result.append((α4, z4))
