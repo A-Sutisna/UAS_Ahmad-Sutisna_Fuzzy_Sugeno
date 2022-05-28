@@ -81,33 +81,33 @@ class Produksi():
         z1 = self.kurang(α1)
         result.append((α1, z1))
         # [R2] JIKA Permintaan TURUN, dan Persediaan SEDIKIT, 
-        #     MAKA Produksi = 10* kurang + 100.
+        #     MAKA Produksi = 10* jumlah_persediaan + 100.
         α2 = min(pmt.turun(jumlah_permintaan), psd.sedikit(jumlah_persediaan))
-        z2 = 10 * kurang + 100
+        z2 = 10 * jumlah_persediaan + 100
         result.append((α2, z2))
 
         # [R3] JIKA Permintaan NAIK, dan Persediaan BANYAK, 
-        #     MAKA Produksi = 10 * kurang + 200.
+        #     MAKA Produksi = 10 * jumlah_persediaan + 200.
         α3 = min(pmt.naik(jumlah_permintaan), psd.banyak(jumlah_persediaan))
-        z3 = 10 * tambah + 200
+        z3 = 10 * jumlah_persediaan + 200
         result.append((α3, z3))
 
         # [R4] JIKA Permintaan NAIK, dan Persediaan SEDIKIT,
-        #     MAKA Produksi =5 * Barang BERTAMBAH.
+        #     MAKA Produksi =5 * jumlah_permintaan + 2 * jumlah_persediaan +300
         α4 = min(pmt.naik(jumlah_permintaan), psd.sedikit(jumlah_persediaan))
-        z4 = self.tambah(α4)
+        z4 = 5 * jumlah_permintaan + 2 * jumlah_persediaan
         result.append((α4, z4))
 
         # [R5] JIKA Permintaan NAIK, dan Persediaan CUKUP,
-        #     MAKA Produksi Barang BERKURANG.
+        #     MAKA Produksi 5 * jumlah_permintaan + 4 * jumlah_persediaan + 200.
         α5 = min(pmt.naik(jumlah_permintaan), psd.cukup(jumlah_persediaan))
-        z5 = self.kurang(α5)
+        z5 = 5 * jumlah_permintaan + 5 * jumlah_persediaan + 200
         result.append((α5, z5))
 
         # [R6] JIKA Permintaan NAIK, dan Persediaan CUKUP,
-        #     MAKA Produksi Barang BERKURANG.
+        #     MAKA Produksi = 5 * jumlah_permintaan + 5 * jumlah_persediaan +300
         α6 = min(pmt.turun(jumlah_permintaan), psd.cukup(jumlah_persediaan))
-        z6 = self.tambah(α6)
+        z6 = 5 * jumlah_permintaan + 5 * jumlah_persediaan +300
         result.append((α6, z6))
 
         return result
